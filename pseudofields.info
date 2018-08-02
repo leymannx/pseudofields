@@ -1,0 +1,5 @@
+name = Pseudo Field Example
+description = Pseudo field example.
+package = Custom
+core = 7.x
+tags[] = developer
