@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Implements hook_field_extra_fields().
+ * Implements hook_entity_extra_field_info().
  */
-function pseudofields_field_extra_fields() {
+function pseudofields_entity_extra_field_info() {
   $extra['node']['article']['display']['foo_bar'] = [
     'label'       => t('My pseudo field'),
     'description' => t('My pseudo field description.'),
@@ -14,14 +14,11 @@ function pseudofields_field_extra_fields() {
 }
 
 /**
- * Implements hook_node_view().
+ * Implements hook_ENTITY_TYPE_view().
  */
-function pseudofields_node_view($node, $view_mode, $langcode) {
-  // Get all extra fields for current node.
-  $extra_fields = field_info_extra_fields('node', $node->type, 'display');
-  // Managed by display mode configuration.
-  if (!empty($extra_fields['foo_bar']['display'][$view_mode]['visible'])) {
-    $node->content['foo_bar'] = [
+function pseudofields_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('foo_bar')) {
+    $build['foo_bar'] = [
       '#markup' => 'This is my custom content',
     ];
   }

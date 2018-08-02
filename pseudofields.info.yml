@@ -1,0 +1,7 @@
+name: Pseudo Field Example
+description: Pseudo field example.
+type: module
+package: Custom
+core: 8.x
+tags:
+- developer
